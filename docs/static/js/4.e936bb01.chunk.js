@@ -1,0 +1,2 @@
+(this.webpackJsonpk1weather=this.webpackJsonpk1weather||[]).push([[4],{48:function(t,e,r){"use strict";r.r(e);var a=r(0),o=r.n(a),c=r(12),n=r(2),i=Object(c.a)((function(t){return{root:{backgroundColor:t.colorPrimary,color:t.textPrimary}}}));e.default=function(){var t=Object(c.c)(),e=i({theme:t}),r=Object(n.f)();return o.a.createElement("div",{className:e.root},"City ",r.name)}}}]);
+//# sourceMappingURL=4.e936bb01.chunk.js.map

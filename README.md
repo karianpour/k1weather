@@ -1,6 +1,6 @@
 # K1 Weather
 
-[Live Demo](https://karianpour.github.io/k1weather)
+[Live Demo](http://weather.karianpour.ir/)
 
 ## Available Scripts
 

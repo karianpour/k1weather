@@ -2,7 +2,7 @@
   "name": "k1weather",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/karianpour/k1weather",
+  "homepage": "https://karianpour.github.io/k1weather/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -27,7 +27,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild" : "rm -rf ./docs && mv build docs",
+    "postbuild" : "rm -rf ./docs && mv build docs && touch docs/CNAME && echo weather.karianpour.ir > docs/CNAME",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

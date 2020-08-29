@@ -2,6 +2,9 @@
   "name": "k1weather",
   "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "source-map-explorer": "^2.5.0"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -26,9 +29,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild" : "rm -rf ./docs && mv build docs && touch docs/CNAME && echo weather.karianpour.ir > docs/CNAME",
+    "postbuild": "rm -rf ./docs && mv build docs && touch docs/CNAME && echo weather.karianpour.ir > docs/CNAME",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "analyze": "source-map-explorer 'docs/static/js/*.js'"
   },
   "eslintConfig": {
     "extends": "react-app"

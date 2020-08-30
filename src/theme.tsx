@@ -1,6 +1,7 @@
 export { createUseStyles, useTheme } from 'react-jss';
 
-export const theme = {  colorPrimary: "green",
+export const theme = {
+  colorPrimary: "green",
   colorSecondary: "red",
   textPrimary: "#ccc",
   textSecondary: "#eee",

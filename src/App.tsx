@@ -5,6 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import { createUseStyles, useTheme, Theme } from './theme';
+import { AppStateProvider } from './state/weather-state';
 
 const NoMatch = lazy(() => import('./pages/NoMatch'));
 const Home = lazy(() => import('./pages/Home'));
@@ -15,7 +16,7 @@ const useStyles = createUseStyles<Theme>(theme => ({
     html: {
       backgroundColor: theme.background,
     },
-    body:{
+    body: {
       margin: 0,
     },
     'html *': {
@@ -28,22 +29,24 @@ const useStyles = createUseStyles<Theme>(theme => ({
 const App: React.FC = () => {
 
   const theme = useTheme();
-  useStyles({theme});
+  useStyles({ theme });
 
   return (
-    <Router>
-      <Switch>
-        <Route path="/city/:name">
-          <CityWeather/>
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-        <Route path="*">
-          <NoMatch />
-        </Route>
-      </Switch>
-    </Router>
+    <AppStateProvider >
+      <Router>
+        <Switch>
+          <Route path="/city/:name">
+            <CityWeather />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+          <Route path="*">
+            <NoMatch />
+          </Route>
+        </Switch>
+      </Router>
+    </AppStateProvider>
   );
 }
 

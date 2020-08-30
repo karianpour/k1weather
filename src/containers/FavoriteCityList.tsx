@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { createUseStyles, useTheme, Theme } from '../theme';
 import { useTranslation } from 'react-i18next';
+import { useAppState } from '../state/weather-state';
+import { observer } from 'mobx-react-lite';
+import CityWeatherCard from './CityWeatherCard';
 
 const useStyles = createUseStyles<Theme>(theme => ({
   root: {
@@ -12,19 +15,22 @@ const useStyles = createUseStyles<Theme>(theme => ({
 
 }));
 
-const WeatherList: React.FC = () => {
+const FavoriteCityList: React.FC = observer(() => {
 
   const theme = useTheme();
   const classes = useStyles({theme});
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+
+  const state = useAppState();
 
   return (
     <div className={classes.root}>
-      List
-      <Link to={`/city/1234`}>{t('ttest')} 1</Link>
-      <div onClick={() => i18n.changeLanguage('de')}>de</div>
+      FavoriteList
+      {state.favoriteCities?.map( city => (
+        <CityWeatherCard key={city.name} city={city}/>
+      ))}
     </div>
   );
-}
+});
 
-export default WeatherList;
+export default FavoriteCityList;

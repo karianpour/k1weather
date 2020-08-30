@@ -1,6 +1,8 @@
 import React from 'react';
 // import { createUseStyles, useTheme, Theme } from '../theme';
-import WeatherList from './WeatherList';
+import TopCityList from '../containers/TopCityList';
+import { useAppState } from '../state/weather-state';
+import FavoriteCityList from '../containers/FavoriteCityList';
 
 // const useStyles = createUseStyles<Theme>(theme => ({
 //   root: {
@@ -11,11 +13,19 @@ import WeatherList from './WeatherList';
 
 const Home: React.FC = () => {
 
+  const state = useAppState();
+
+  React.useEffect(()=>{
+    state.init();
+  });
   // const theme = useTheme();
   // const classes = useStyles({theme});
 
   return (
-    <WeatherList/>
+    <>
+      <FavoriteCityList/>
+      <TopCityList/>
+    </>
   );
 }
 

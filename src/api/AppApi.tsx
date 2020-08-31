@@ -2,22 +2,33 @@
 export interface IWeatherData {
   city: ICity,
   current: {
-    observation_time: string,
-    temperature: number,
-    weather_code: number,
-    weather_icons: string[],
-    weather_descriptions: string[],
-    wind_speed: number,
-    wind_degree: number,
-    wind_dir: string,
-    pressure: number,
-    precip: number,
-    humidity: number,
-    cloudcover: number,
-    feelslike: number,
-    uv_index: number,
-    visibility: number,
-    is_day: boolean,
+    "last_updated_epoch": number,
+    "last_updated": string,
+    "temp_c": number,
+    "temp_f": number,
+    "is_day": number,
+    "condition": {
+      "text": string,
+      "icon": string,
+      "code": number,
+    },
+    "wind_mph": number,
+    "wind_kph": number,
+    "wind_degree": number,
+    "wind_dir": string,
+    "pressure_mb": number,
+    "pressure_in": number,
+    "precip_mm": number,
+    "precip_in": number,
+    "humidity": number,
+    "cloud": number,
+    "feelslike_c": number,
+    "feelslike_f": number,
+    "vis_km": number,
+    "vis_miles": number,
+    "uv": number,
+    "gust_mph": number,
+    "gust_kph": number,
     updated_at: Date,
   }
 }
@@ -29,35 +40,34 @@ export interface ICity {
 }
 
 export class AppApi {
-  private WeatherstackAPIKey: string;
+  private WeatherAPIKey: string;
 
-  constructor(){
+  constructor() {
     // Setting api key in front-end is a bad practice and not secure,
     // but as the requirement is to avoid having back-end there is no other way 
-    this.WeatherstackAPIKey = process.env.REACT_APP_WEATHERSTACK_API_KEY || '';
+    this.WeatherAPIKey = process.env.REACT_APP_WEATHERAPI_API_KEY || '';
   }
 
   async fetchTopCities(): Promise<ICity[] | undefined> {
     const url = `https://public.opendatasoft.com/api/records/1.0/search/?dataset=worldcitiespop&q=&rows=15&sort=population&facet=country`;
-    try{
+    try {
       const response = await fetch(url);
       const data = await response.json() as { records: any[] };
-      const cities = data?.records?.map( (r: any) => ({
+      const cities = data?.records?.map((r: any) => ({
         name: (r?.fields?.accentcity || r?.fields?.name) as string,
         country: r?.fields?.country as string,
         region: r?.fields?.region as string,
-      })).sort( (a, b) => a.name.localeCompare(b.name));
+      })).sort((a, b) => a.name.localeCompare(b.name));
       return cities;
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
   }
 
   async fetchWeatherForCity(cityName: string): Promise<IWeatherData | undefined> {
-    // using http is not secure, but the free plan of the api does not support it
-    const url = `http://api.weatherstack.com/current?access_key=${this.WeatherstackAPIKey}&query=${cityName}`;
-    // docs under https://weatherstack.com/documentation#query_parameter
-    try{
+    const url = `https://api.weatherapi.com/v1/current.json?key=${this.WeatherAPIKey}&q=${cityName}`;
+    // docs under https://www.weatherapi.com/api-explorer.aspx
+    try {
       const response = await fetch(url);
       const data = await response.json();
       const weather = {
@@ -67,50 +77,66 @@ export class AppApi {
           region: data.location.region,
         },
         current: {
-          observation_time: data.current.observation_time,
-          temperature: data.current.temperature,
-          weather_code: data.current.weather_code,
-          weather_icons: data.current.weather_icons,
-          weather_descriptions: data.current.weather_descriptions,
-          wind_speed: data.current.wind_speed,
-          wind_degree: data.current.wind_degree,
-          wind_dir: data.current.wind_dir,
-          pressure: data.current.pressure,
-          precip: data.current.precip,
-          humidity: data.current.humidity,
-          cloudcover: data.current.cloudcover,
-          feelslike: data.current.feelslike,
-          uv_index: data.current.uv_index,
-          visibility: data.current.visibility,
-          is_day: data.current.is_day === "yes",
+          "last_updated_epoch": data.current.last_updated_epoch,
+          "last_updated": data.current.last_updated,
+          "temp_c": data.current.temp_c,
+          "temp_f": data.current.temp_f,
+          "is_day": data.current.is_day,
+          "condition": {
+            "text": data.current.condition.text,
+            "icon": data.current.condition.icon,
+            "code": data.current.condition.code,
+          },
+          "wind_mph": data.current.wind_mph,
+          "wind_kph": data.current.wind_kph,
+          "wind_degree": data.current.wind_degree,
+          "wind_dir": data.current.wind_dir,
+          "pressure_mb": data.current.pressure_mb,
+          "pressure_in": data.current.pressure_in,
+          "precip_mm": data.current.precip_mm,
+          "precip_in": data.current.precip_in,
+          "humidity": data.current.humidity,
+          "cloud": data.current.cloud,
+          "feelslike_c": data.current.feelslike_c,
+          "feelslike_f": data.current.feelslike_f,
+          "vis_km": data.current.vis_km,
+          "vis_miles": data.current.vis_miles,
+          "uv": data.current.uv,
+          "gust_mph": data.current.gust_mph,
+          "gust_kph": data.current.gust_kph,
           updated_at: new Date(),
         }
       };
       return weather;
-    }catch(err){
+    } catch (err) {
       console.log(err);
     }
   }
 
   async fetchWeatherForLocation(lat: number, lon: number): Promise<IWeatherData | undefined> {
-    // using http is not secure, but the free plan of the api does not support it
-    const url = `http://api.weatherstack.com/current?access_key=${this.WeatherstackAPIKey}&query=${lat},${lon}`;
-    // docs under https://weatherstack.com/documentation#query_parameter
+    const url = `https://api.weatherapi.com/v1/current.json?key=${this.WeatherAPIKey}&query=${lat},${lon}`;
     return;
   }
 
   async fetchWeatherForMyIP(): Promise<IWeatherData | undefined> {
-    // using http is not secure, but the free plan of the api does not support it
-    const url = `http://api.weatherstack.com/current?access_key=${this.WeatherstackAPIKey}&query=fetch:ip`;
-    // docs under https://weatherstack.com/documentation#query_parameter
+    const url = `https://api.weatherapi.com/v1/current.json?key=${this.WeatherAPIKey}&query=fetch:ip`;
     return;
   }
 
-  async fetchLookup(query: string): Promise<ICity | undefined> {
-    // using http is not secure, but the free plan of the api does not support it
-    const url = `http://api.weatherstack.com/autocomplete?access_key=${this.WeatherstackAPIKey}&query=${query}`;
-    // docs under https://weatherstack.com/documentation#query_parameter
-    return;
+  async fetchLookup(query: string): Promise<ICity[] | undefined> {
+    const url = `https://api.weatherapi.com/v1/search.json?key=${this.WeatherAPIKey}&q=${query}`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json() as any[];
+      const cities = data.map( c => ({
+        name: c.name,
+        region: c.region,
+        country: c.country,
+      }));
+      return cities;
+    } catch (err) {
+      console.log(err);
+    }
   }
 
 }

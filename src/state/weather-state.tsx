@@ -7,22 +7,33 @@ const WeatherDataTTL = 10 * 60 * 1000;
 
 export const WeatherState = types
   .model("WeatherState", {
-    observation_time: types.string,
-    temperature: types.number,
-    weather_code: types.number,
-    weather_icons: types.array(types.string),
-    weather_descriptions: types.array(types.string),
-    wind_speed: types.number,
-    wind_degree: types.number,
-    wind_dir: types.string,
-    pressure: types.number,
-    precip: types.number,
-    humidity: types.number,
-    cloudcover: types.number,
-    feelslike: types.number,
-    uv_index: types.number,
-    visibility: types.number,
-    is_day: types.boolean,
+    "last_updated_epoch": types.number,
+    "last_updated": types.string,
+    "temp_c": types.number,
+    "temp_f": types.number,
+    "is_day": types.number,
+    "condition": types.model({
+        "text": types.string,
+        "icon": types.string,
+        "code": types.number,
+    }),
+    "wind_mph": types.number,
+    "wind_kph": types.number,
+    "wind_degree": types.number,
+    "wind_dir": types.string,
+    "pressure_mb": types.number,
+    "pressure_in": types.number,
+    "precip_mm": types.number,
+    "precip_in": types.number,
+    "humidity": types.number,
+    "cloud": types.number,
+    "feelslike_c": types.number,
+    "feelslike_f": types.number,
+    "vis_km": types.number,
+    "vis_miles": types.number,
+    "uv": types.number,
+    "gust_mph": types.number,
+    "gust_kph": types.number,
     updated_at: types.Date,
   })
   .actions(self => {
@@ -58,12 +69,20 @@ export const CityState = types
     }
   });
 
+export const LookupResultState = types
+  .model("LookupResultState", {
+    name: types.string,
+    country: types.string,
+    region: types.string,
+  });
 
 export const AppState = types
   .model("AppState", {
     topCities: types.array(types.reference(CityState)),
     favoriteCities: types.array(types.reference(CityState)),
     cities: types.map(CityState),
+    lookup: types.optional(types.string, ''),
+    lookupResult: types.array(LookupResultState),
   })
   .views(self => {
     return {
@@ -120,7 +139,6 @@ export const AppState = types
         const index = self.favoriteCities.findIndex( c => c === city);
         if(index !== -1){
           self.favoriteCities.splice(index, 1);
-          self.addToTopCity(city);
         }
       },
       addCityWeather(weather: IWeatherData): ICityState{
@@ -133,10 +151,34 @@ export const AppState = types
         }));
         return cityRef;
       },
+      removeCityWeather(city: ICityState){
+        self.cities.delete(city.id);
+      },
+      setLookupResult(result?: ICity[]){
+        self.lookupResult.clear();
+        result && self.lookupResult.push(...result);
+        console.log('lookup result set')
+      },
     }
   })
   .actions(self => {
     return {
+      async setLookup(query: string) {
+        self.lookup = query;
+        console.log('looking up')
+        if(query){
+          const result = await getEnv<EnvType>(self).api.fetchLookup(query);
+          if(self.lookup === query){
+            self.setLookupResult(result);
+            console.log('same qeury, setting')
+          }else{
+            console.log('not same qeury, ignoring')
+          }
+        }else{
+          console.log('empty query , make it empty')
+          self.setLookupResult(undefined);
+        }
+      },
       async updateCurrentWeather(){
         const api = getEnv<EnvType>(self).api;
         const now = new Date();
@@ -151,6 +193,8 @@ export const AppState = types
             }else{
               const addedCity = self.addCityWeather(weather);
               self.removeFromTopCity(city);
+              self.removeFromFavorite(city);
+              self.removeCityWeather(city);
               self.addToTopCity(addedCity);
             }
           }

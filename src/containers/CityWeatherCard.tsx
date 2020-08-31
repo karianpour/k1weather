@@ -28,7 +28,7 @@ const CityWeatherCard: React.FC<{city: ICityState}> = observer(({city}) => {
       <Link to={`/city/${city.country}/${city.region}/${city.name}`}>
         {city.name}
         <div>
-          {city.currentWeather && <span>{city.currentWeather.temperature}</span>}
+          {city.currentWeather && <span>{city.currentWeather.temp_c}</span>}
           {!city.currentWeather && <span>...</span>}
         </div>
       </Link>

@@ -3,6 +3,7 @@ import React from 'react';
 import TopCityList from '../containers/TopCityList';
 import { useAppState } from '../state/weather-state';
 import FavoriteCityList from '../containers/FavoriteCityList';
+import Scaffold from '../containers/Scaffold';
 
 // const useStyles = createUseStyles<Theme>(theme => ({
 //   root: {
@@ -22,10 +23,10 @@ const Home: React.FC = () => {
   // const classes = useStyles({theme});
 
   return (
-    <>
+    <Scaffold>
       <FavoriteCityList/>
       <TopCityList/>
-    </>
+    </Scaffold>
   );
 }
 

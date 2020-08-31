@@ -21,6 +21,12 @@ const useStyles = createUseStyles<Theme>(theme => ({
     },
     'html *': {
       fontFamily: 'Yekan Bakh',
+      boxSizing: 'border-box',
+      WebkitFontSmoothing: 'antialiased', // Antialiasing.
+      MozOsxFontSmoothing: 'grayscale', // Antialiasing.
+      // Fix font resize problem in iOS
+      WebkitTextSizeAdjust: '100%',
+      color: theme.text.primary,
     },
   },
 

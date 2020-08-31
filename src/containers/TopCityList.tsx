@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import { createUseStyles, useTheme, Theme } from '../theme';
 import { useTranslation } from 'react-i18next';
 import { useAppState } from '../state/weather-state';
@@ -8,11 +7,16 @@ import CityWeatherCard from './CityWeatherCard';
 
 const useStyles = createUseStyles<Theme>(theme => ({
   root: {
-
-    backgroundColor: theme.colorPrimary,
-    color: theme.textPrimary,
   },
-
+  title: {
+    textAlign: 'center',
+    backgroundColor: theme.primary.light,
+    padding: '8px 0'
+  },
+  cities: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  }
 }));
 
 const TopCityList: React.FC = observer(() => {
@@ -25,10 +29,12 @@ const TopCityList: React.FC = observer(() => {
 
   return (
     <div className={classes.root}>
-      List
-      {state.topCities?.map( city => (
-        <CityWeatherCard key={city.name} city={city}/>
-      ))}
+      <h2 className={classes.title}>{t('top_city_list_title')}</h2>
+      <div className={classes.cities}>
+        {state.topCities?.map( city => (
+          <CityWeatherCard key={city.name} city={city}/>
+        ))}
+      </div>
     </div>
   );
 });

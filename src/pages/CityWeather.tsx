@@ -4,11 +4,23 @@ import { useParams } from 'react-router-dom';
 import { useAppState } from '../state/weather-state';
 import { observer } from 'mobx-react-lite';
 import Scaffold from '../containers/Scaffold';
+import { IconButton } from '../components/IconButton';
+import { FavoriteIcon } from '../components/icons/FavoriteIcon';
+import { FavoriteOutlineIcon } from '../components/icons/FavoriteOutlineIcon';
 
 const useStyles = createUseStyles<Theme>(theme => ({
   root: {
-    backgroundColor: theme.colorPrimary,
-    color: theme.textPrimary,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    minHeight: 300,
+    borderRadius: '4px',
+    border: `1px solid ${theme.border.main}`,
+  },
+  actions: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    padding: 8,
   },
 }));
 
@@ -41,13 +53,16 @@ const CityWeather: React.FC = observer(() => {
   return (
     <Scaffold>
       <div className={classes.root}>
-        {city && <div>
+        {city && <>
           City {city.name}
           {city.currentWeather && <>Temp {city.currentWeather?.temp_c}</>}
           {!city.currentWeather && <>:D</>}
-          {city.currentWeather && !favorite && <button onClick={addToFavorite}>add fav</button>}
-          {city.currentWeather && favorite && <button onClick={removeFromFavorite}>remove fav</button>}
-        </div>}
+
+          <div className={classes.actions}>
+            {city.currentWeather && favorite && <IconButton onClick={removeFromFavorite}><FavoriteIcon/></IconButton>}
+            {city.currentWeather && !favorite && <IconButton onClick={addToFavorite}><FavoriteOutlineIcon/></IconButton>}
+          </div>
+        </>}
         {!city && <span>...</span>}
       </div>
     </Scaffold>

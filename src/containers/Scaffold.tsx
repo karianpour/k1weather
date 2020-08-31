@@ -4,8 +4,37 @@ import Lookup from './Lookup';
 
 const useStyles = createUseStyles<Theme>(theme => ({
   root: {
-    backgroundColor: theme.colorPrimary,
-    color: theme.textPrimary,
+    backgroundColor: theme.background.main,
+  },
+  container: {
+    width: '100%',    
+    margin: '0 auto',
+    padding: '0 24px',
+    maxWidth: 972,
+  },
+  '@media (max-width: 1024px)': {
+    container: {
+      maxWidth: 680,
+    }
+  },
+  '@media (max-width: 480px)': {
+    container: {
+      padding: '0 8px',
+    }
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    height: 48,
+    padding: 8,
+    marginBottom: 16,
+    color: theme.primary.text,
+    backgroundColor: theme.primary.main,
+  },
+  footer: {
+    marginTop: 24,
+    color: theme.secondary.text,
+    backgroundColor: theme.secondary.main,
   },
 }));
 
@@ -15,9 +44,15 @@ const Scaffold: React.FC = ({children}) => {
 
   return (
     <div className={classes.root}>
-      <Lookup/>
-      {children}
-      <WeatherApiLinkBack/>
+      <header className={classes.header}>
+        <Lookup/>
+      </header>
+      <div className={classes.container}>
+        {children}
+      </div>
+      <footer className={classes.footer}>
+        <WeatherApiLinkBack/>
+      </footer>
     </div>
   );
 };

@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import App, { DefaultLoadingIndicator } from './App';
 import * as serviceWorker from './serviceWorker';
 import { ThemeProvider } from 'react-jss';
-import {theme} from './theme';
+import {lightTheme} from './theme';
 import './locale/i18n';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={lightTheme}>
       <Suspense fallback={<DefaultLoadingIndicator />}>
         <App />
       </Suspense>

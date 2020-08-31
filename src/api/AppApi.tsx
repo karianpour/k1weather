@@ -114,12 +114,12 @@ export class AppApi {
   }
 
   async fetchWeatherForLocation(lat: number, lon: number): Promise<IWeatherData | undefined> {
-    const url = `https://api.weatherapi.com/v1/current.json?key=${this.WeatherAPIKey}&query=${lat},${lon}`;
+    // const url = `https://api.weatherapi.com/v1/current.json?key=${this.WeatherAPIKey}&query=${lat},${lon}`;
     return;
   }
 
   async fetchWeatherForMyIP(): Promise<IWeatherData | undefined> {
-    const url = `https://api.weatherapi.com/v1/current.json?key=${this.WeatherAPIKey}&query=fetch:ip`;
+    // const url = `https://api.weatherapi.com/v1/current.json?key=${this.WeatherAPIKey}&query=fetch:ip`;
     return;
   }
 

@@ -3,8 +3,6 @@ import { createUseStyles, useTheme, Theme } from '../theme';
 
 const useStyles = createUseStyles<Theme>(theme => ({
   root: {
-    backgroundColor: theme.colorPrimary,
-    color: theme.textPrimary,
   },
 }));
 

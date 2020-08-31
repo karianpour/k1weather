@@ -32,7 +32,7 @@ const useStyles = createUseStyles<Theme>(theme => ({
   },
 }));
 
-const CityWeatherCard: React.FC<{city: ICityState}> = observer(({city}) => {
+const CityWeatherCard: React.FC<{city: ICityState, inFavorite?: boolean, inTopCity?: boolean}> = observer(({city, inFavorite, inTopCity}) => {
   const theme = useTheme();
   const classes = useStyles({theme});
 
@@ -45,7 +45,10 @@ const CityWeatherCard: React.FC<{city: ICityState}> = observer(({city}) => {
 
   const removeFromFavorite = (event: React.MouseEvent) => {
     event.preventDefault();
-    city && state.removeFromFavorite(city);
+    if(city) {
+      state.removeFromFavorite(city);
+      state.addToTopCity(city);
+    }
   }
 
   const addToFavorite = (event: React.MouseEvent) => {
@@ -53,7 +56,7 @@ const CityWeatherCard: React.FC<{city: ICityState}> = observer(({city}) => {
     city && state.addToFavorite(city);
   }
 
-  const favorite = city?.isFavorite();
+  const isFavorite = city?.isFavorite();
 
   return (
     <div className={classes.root}>
@@ -64,9 +67,9 @@ const CityWeatherCard: React.FC<{city: ICityState}> = observer(({city}) => {
           {!city.currentWeather && <span>...</span>}
         </div>
         <div className={classes.actions}>
-          {favorite && <IconButton onClick={removeFromFavorite}><FavoriteIcon/></IconButton>}
-          {!favorite && <IconButton onClick={addToFavorite}><FavoriteOutlineIcon/></IconButton>}
-          {!favorite && <IconButton onClick={removeFromTopCity}><DeleteIcon/></IconButton>}
+          {inFavorite && isFavorite && <IconButton onClick={removeFromFavorite}><FavoriteIcon/></IconButton>}
+          {inTopCity && !isFavorite && <IconButton onClick={addToFavorite}><FavoriteOutlineIcon/></IconButton>}
+          {inTopCity && !isFavorite && <IconButton onClick={removeFromTopCity}><DeleteIcon/></IconButton>}
         </div>
       </Link>
     </div>

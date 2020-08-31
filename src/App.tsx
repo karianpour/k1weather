@@ -35,7 +35,7 @@ const App: React.FC = () => {
     <AppStateProvider >
       <Router>
         <Switch>
-          <Route path="/city/:name">
+          <Route path="/city/:country/:region/:name">
             <CityWeather />
           </Route>
           <Route path="/">

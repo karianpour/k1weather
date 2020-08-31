@@ -15,10 +15,10 @@ const CityWeather: React.FC = observer(() => {
   const theme = useTheme();
   const classes = useStyles({theme});
 
-  const {name} = useParams<{name: string}>();
+  const {country, region, name} = useParams<{country: string, region: string, name: string}>();
   const state = useAppState();
 
-  const city = state.findCity(name);
+  const city = state.findCity(country, region, name);
 
   React.useEffect(() => {
     !city && state.fetchCity(name);

@@ -53,9 +53,6 @@ export const CityState = types
   .actions(self => {
     return {
       setCurrentWeather(weather: IWeatherData){
-        self.name = weather.city.name;
-        self.country = weather.city.country;
-        self.region = weather.city.region;
         self.currentWeather = WeatherState.create(weather.current);
       },
     }
@@ -70,8 +67,8 @@ export const AppState = types
   })
   .views(self => {
     return {
-      findCity(cityName: string): ICityState | undefined{
-        const city = self.cities.get(cityName);
+      findCity(country: string, region: string, name: string): ICityState | undefined{
+        const city = self.cities.get(`${country}/${region}/${name}`);
         return city;
       },
     }
@@ -100,7 +97,7 @@ export const AppState = types
         self.topCities.clear();
         cities.forEach( city => {
           const cityRef = self.cities.put(CityState.create({
-            id: city.name,
+            id: `${city.country}/${city.region}/${city.name}`,
             name: city.name,
             country: city.country,
             region: city.region,
@@ -126,6 +123,20 @@ export const AppState = types
           self.addToTopCity(city);
         }
       },
+      addCityWeather(weather: IWeatherData): ICityState{
+        const cityRef = self.cities.put(CityState.create({
+          id: `${weather.city.country}/${weather.city.region}/${weather.city.name}`,
+          name: weather.city.name,
+          country: weather.city.country,
+          region: weather.city.region,
+          currentWeather: WeatherState.create(weather.current),
+        }));
+        return cityRef;
+      },
+    }
+  })
+  .actions(self => {
+    return {
       async updateCurrentWeather(){
         const api = getEnv<EnvType>(self).api;
         const now = new Date();
@@ -135,19 +146,16 @@ export const AppState = types
           }
           const weather = await api.fetchWeatherForCity(city.name);
           if(weather){
-            city.setCurrentWeather(weather);
+            if(`${weather.city.country}/${weather.city.region}/${weather.city.name}` === city.id){
+              city.setCurrentWeather(weather);
+            }else{
+              const addedCity = self.addCityWeather(weather);
+              self.removeFromTopCity(city);
+              self.addToTopCity(addedCity);
+            }
           }
         }));
       },
-      addSearchedCityWeather(weather: IWeatherData){
-        self.cities.put(CityState.create({
-          id: weather.city.name,
-          name: weather.city.name,
-          country: weather.city.country,
-          region: weather.city.region,
-          currentWeather: WeatherState.create(weather.current),
-        }));
-      }
     }
   })
   .actions(self => {
@@ -164,7 +172,7 @@ export const AppState = types
       async fetchCity(cityName: string){
         const weather = await getEnv<EnvType>(self).api.fetchWeatherForCity(cityName);
         if(weather){
-          self.addSearchedCityWeather(weather);
+          self.addCityWeather(weather);
         }
       }
     }

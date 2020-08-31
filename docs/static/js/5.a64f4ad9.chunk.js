@@ -1,0 +1,2 @@
+(this.webpackJsonpk1weather=this.webpackJsonpk1weather||[]).push([[5],{64:function(t,r,e){"use strict";e.r(r);var o=e(0),a=e.n(o),c=e(17),n=Object(c.a)((function(t){return{root:{backgroundColor:t.colorPrimary,color:t.textPrimary}}}));r.default=function(){var t=Object(c.c)(),r=n({theme:t});return a.a.createElement("div",{className:r.root},"404 - Not Found")}}}]);
+//# sourceMappingURL=5.a64f4ad9.chunk.js.map

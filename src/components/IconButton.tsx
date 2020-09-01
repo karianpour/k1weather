@@ -12,7 +12,7 @@ const useStyles = createUseStyles<Theme>(theme => ({
     overflow: 'visible', // Explicitly set the default value to solve a bug on IE 11.
     color: theme.action.active,
     border: 0,
-    margin: 0, // Remove the margin in Safari
+    margin: '0 4px',
     cursor: 'pointer',
     transition: 'background-color 300ms ease',
     '&:hover': {

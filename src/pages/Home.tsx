@@ -4,6 +4,7 @@ import TopCityList from '../containers/TopCityList';
 import { useAppState } from '../state/weather-state';
 import FavoriteCityList from '../containers/FavoriteCityList';
 import Scaffold from '../containers/Scaffold';
+import { useTranslation } from 'react-i18next';
 
 // const useStyles = createUseStyles<Theme>(theme => ({
 //   root: {
@@ -15,6 +16,7 @@ import Scaffold from '../containers/Scaffold';
 const Home: React.FC = () => {
 
   const state = useAppState();
+  const { t } = useTranslation();
 
   React.useEffect(()=>{
     state.init();
@@ -24,6 +26,7 @@ const Home: React.FC = () => {
 
   return (
     <Scaffold>
+      <h1>{t('home')}</h1>
       <FavoriteCityList/>
       <TopCityList/>
     </Scaffold>

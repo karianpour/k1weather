@@ -28,6 +28,11 @@ export const lightTheme = {
   },
   text: {
     primary: '#333333',
+    secondary: '#666666',
+  },
+  temperature: {
+    cold: 'blue',
+    warm: 'red',
   },
   mobileBreakPoint: 480,
   tabletBreakPoint: 1024,

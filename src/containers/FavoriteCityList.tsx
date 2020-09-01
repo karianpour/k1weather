@@ -13,7 +13,8 @@ const useStyles = createUseStyles<Theme>(theme => ({
   title: {
     textAlign: 'center',
     backgroundColor: theme.primary.light,
-    padding: '8px 0'
+    padding: '8px 0',
+    borderRadius: 4,
   },
   cities: {
     display: 'flex',

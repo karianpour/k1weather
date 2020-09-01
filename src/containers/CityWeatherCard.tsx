@@ -7,11 +7,12 @@ import { DeleteIcon } from '../components/icons/DeleteIcon';
 import { IconButton } from '../components/IconButton';
 import { FavoriteIcon } from '../components/icons/FavoriteIcon';
 import { FavoriteOutlineIcon } from '../components/icons/FavoriteOutlineIcon';
+import clsx from 'clsx';
 
 const useStyles = createUseStyles<Theme>(theme => ({
   root: {
     margin: 8,
-    padding: '8px',
+    padding: '16px',
     borderRadius: '4px',
     border: `1px solid ${theme.border.main}`,
     width: 'calc(33% - 14px)',
@@ -29,6 +30,22 @@ const useStyles = createUseStyles<Theme>(theme => ({
   actions: {
     display: 'flex',
     justifyContent: 'flex-end',
+    padding: '24px 0px 8px 8px',
+  },
+  row: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '8px 0',
+    alignItems: 'center',
+  },
+  temperature: {
+    fontSize: 24,
+  },
+  negative: {
+    color: theme.temperature.cold,
+  },
+  positive: {
+    color: theme.temperature.warm,
   },
 }));
 
@@ -58,13 +75,17 @@ const CityWeatherCard: React.FC<{city: ICityState, inFavorite?: boolean, inTopCi
 
   const isFavorite = city?.isFavorite();
 
+  const weather = city.currentWeather;
+
   return (
     <div className={classes.root}>
       <Link to={`/city/${city.country}/${city.region}/${city.name}`}>
-        {city.name}
-        <div>
-          {city.currentWeather && <span>{city.currentWeather.temp_c}</span>}
-          {!city.currentWeather && <span>...</span>}
+        <div className={classes.row}>
+          <h3>{city.name}</h3>
+          {weather && <div>
+            <div className={clsx(classes.temperature, weather.temp_c > 0 ? classes.positive : classes.negative)}>{weather.temp_c > 0 && ('+')}{weather.temp_c}&deg;</div>
+          </div>}
+          {!weather && <span>...</span>}
         </div>
         <div className={classes.actions}>
           {inFavorite && isFavorite && <IconButton onClick={removeFromFavorite}><FavoriteIcon/></IconButton>}

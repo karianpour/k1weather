@@ -81,12 +81,19 @@ const useStyles = createUseStyles<Theme>(theme => ({
     borderRadius: '0 0 4px 4px',
   },
   resultRow: {
-    padding: 2,
+    display: 'flex',
+    alignItems: 'center',
+    height: 48,
+    padding: 12,
     cursor: 'default',
     color: theme.text.primary,
     margin: 0,
+    borderTop: `1px dotted ${theme.border.main}`,
     '&:hover': {
       backgroundColor: `${theme.primary.main}11`,
+    },
+    '&:first-child': {
+      borderTop: 'unset',
     },
   },
   resultRowActive: {
@@ -107,8 +114,15 @@ const Lookup: React.FC = () => {
   const [active, setActive] = React.useState(false);
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const handleActivateLookup = () => {
-    setActive( a => !a );
+  const handleOpenLookup = () => {
+    const listbox = document.getElementById('lookup-listbox');
+    if(!listbox){
+      setActive(true);
+    }
+  }
+
+  const handleInputBlur = () => {
+    setActive(false);
   }
 
   const history = useHistory();
@@ -195,7 +209,7 @@ const Lookup: React.FC = () => {
       aria-haspopup="listbox"
     >
       <label htmlFor="lookup-input" id="lookup-label" className={classes.label}>
-        <SearchIcon className={classes.icon} onClick={handleActivateLookup}/>
+        <SearchIcon className={classes.icon} onClick={handleOpenLookup}/>
       </label>
       <input
         ref={inputRef}
@@ -207,6 +221,7 @@ const Lookup: React.FC = () => {
         aria-controls="lookup-listbox"
         onKeyUp={handleKeyUp}
         onKeyDown={handleKeyDown}
+        onBlur={handleInputBlur}
       />
       <LookupResultList active={active} showResult={showResult}/>
     </div>
@@ -243,7 +258,7 @@ const LookupResultList: React.FC<{active: boolean, showResult: (city: ICity)=>vo
               className={clsx(classes.resultRow, active && classes.resultRowActive)}
               onClick={() => showResult(result)}
             >
-              {result.name} / {result.region} / {result.country}
+              {result.name}
             </li>
           );
         })}

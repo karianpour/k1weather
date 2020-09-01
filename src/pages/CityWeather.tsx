@@ -4,23 +4,12 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useAppState } from '../state/weather-state';
 import { observer } from 'mobx-react-lite';
 import Scaffold from '../containers/Scaffold';
-import { IconButton } from '../components/IconButton';
-import { FavoriteIcon } from '../components/icons/FavoriteIcon';
-import { FavoriteOutlineIcon } from '../components/icons/FavoriteOutlineIcon';
+import CityDetails from '../containers/CityDetails';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = createUseStyles<Theme>(theme => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    minHeight: 300,
-    borderRadius: '4px',
-    border: `1px solid ${theme.border.main}`,
-  },
-  actions: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    padding: 8,
+  title: {
+    fontSize: 24,
   },
 }));
 
@@ -31,6 +20,7 @@ const CityWeather: React.FC = observer(() => {
   const {country, region, name} = useParams<{country: string, region: string, name: string}>();
   const state = useAppState();
   const history = useHistory();
+  const { t } = useTranslation();
 
   const city = state.findCity(country, region, name);
 
@@ -47,34 +37,11 @@ const CityWeather: React.FC = observer(() => {
     }
   }, [city, country, region, name, state, history]);
 
-  const addToFavorite = () => {
-    city && state.addToFavorite(city);
-  }
-
-  const removeFromFavorite = () => {
-    if(city) {
-      state.removeFromFavorite(city);
-      state.addToTopCity(city);
-    }
-  }
-
-  const favorite = city?.isFavorite();
-
   return (
     <Scaffold>
-      <div className={classes.root}>
-        {city && <>
-          City {city.name}
-          {city.currentWeather && <>Temp {city.currentWeather?.temp_c}</>}
-          {!city.currentWeather && <>:D</>}
-
-          <div className={classes.actions}>
-            {city.currentWeather && favorite && <IconButton onClick={removeFromFavorite}><FavoriteIcon/></IconButton>}
-            {city.currentWeather && !favorite && <IconButton onClick={addToFavorite}><FavoriteOutlineIcon/></IconButton>}
-          </div>
-        </>}
-        {!city && <span>...</span>}
-      </div>
+      <h1 className={classes.title}>{t('city_weather_details')}</h1>
+      {city && <CityDetails city={city}/>}
+      {!city && <span>loading...</span>}
     </Scaffold>
   );
 });

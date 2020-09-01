@@ -20,6 +20,10 @@ const useStyles = createUseStyles<Theme>(theme => ({
     body: {
       margin: 0,
     },
+    a: {
+      textDecoration: 'none',
+      color: theme.text.primary,
+    },
     'html *': {
       fontFamily: 'Yekan Bakh',
       boxSizing: 'border-box',

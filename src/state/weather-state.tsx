@@ -47,6 +47,7 @@ export const CityState = types
     name: types.string,
     country: types.string,
     region: types.string,
+    note: types.optional(types.string, ''),
     currentWeather: types.maybeNull(WeatherState),
   })
   .views(self => {
@@ -66,6 +67,9 @@ export const CityState = types
       setCurrentWeather(weather: IWeatherData){
         self.currentWeather = WeatherState.create(weather.current);
       },
+      setNote(note: string){
+        self.note = note;
+      }
     }
   });
 

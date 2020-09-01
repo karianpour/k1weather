@@ -35,6 +35,11 @@ const useStyles = createUseStyles<Theme>(theme => ({
     marginTop: 24,
     color: theme.secondary.text,
     backgroundColor: theme.secondary.main,
+    fontSize: 12,
+    padding: '0 12px',
+    '& a':{
+      color: theme.background.main,
+    }
   },
 }));
 

@@ -83,6 +83,7 @@ export const AppState = types
     cities: types.map(CityState),
     lookup: types.optional(types.string, ''),
     lookupResult: types.array(LookupResultState),
+    lookupActiveIndex: types.maybeNull(types.number),
   })
   .views(self => {
     return {
@@ -156,8 +157,11 @@ export const AppState = types
       },
       setLookupResult(result?: ICity[]){
         self.lookupResult.clear();
+        self.lookupActiveIndex = null;
         result && self.lookupResult.push(...result);
-        console.log('lookup result set')
+      },
+      setLookupActiveIndex(index: number | null){
+        self.lookupActiveIndex = index;
       },
     }
   })
@@ -165,17 +169,12 @@ export const AppState = types
     return {
       async setLookup(query: string) {
         self.lookup = query;
-        console.log('looking up')
         if(query){
           const result = await getEnv<EnvType>(self).api.fetchLookup(query);
           if(self.lookup === query){
             self.setLookupResult(result);
-            console.log('same qeury, setting')
-          }else{
-            console.log('not same qeury, ignoring')
           }
         }else{
-          console.log('empty query , make it empty')
           self.setLookupResult(undefined);
         }
       },
@@ -213,10 +212,11 @@ export const AppState = types
         }
         await self.updateCurrentWeather();
       },
-      async fetchCity(cityName: string){
+      async fetchCity(cityName: string): Promise<ICityState | undefined>{
         const weather = await getEnv<EnvType>(self).api.fetchWeatherForCity(cityName);
         if(weather){
-          self.addCityWeather(weather);
+          const city = self.addCityWeather(weather);
+          return city;
         }
       }
     }

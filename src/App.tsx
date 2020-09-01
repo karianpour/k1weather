@@ -15,6 +15,7 @@ const useStyles = createUseStyles<Theme>(theme => ({
   '@global': {
     html: {
       backgroundColor: theme.background,
+      color: theme.text.primary,
     },
     body: {
       margin: 0,
@@ -26,7 +27,6 @@ const useStyles = createUseStyles<Theme>(theme => ({
       MozOsxFontSmoothing: 'grayscale', // Antialiasing.
       // Fix font resize problem in iOS
       WebkitTextSizeAdjust: '100%',
-      color: theme.text.primary,
     },
   },
 

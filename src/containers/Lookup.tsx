@@ -191,6 +191,7 @@ const Lookup: React.FC = () => {
       role="combobox"
       aria-owns="lookup-listbox"
       aria-expanded={active? 'true': 'false'}
+      aria-controls="lookup-listbox"
       aria-haspopup="listbox"
     >
       <label htmlFor="lookup-input" id="lookup-label" className={classes.label}>
@@ -237,6 +238,7 @@ const LookupResultList: React.FC<{active: boolean, showResult: (city: ICity)=>vo
             <li
               key={result.name}
               role="option"
+              id={`result-item-${index}`}
               aria-selected={active ? 'true' : 'false'}
               className={clsx(classes.resultRow, active && classes.resultRowActive)}
               onClick={() => showResult(result)}

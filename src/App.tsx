@@ -43,7 +43,7 @@ const App: React.FC = () => {
 
   return (
     <AppStateProvider >
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route path="/city/:country/:region/:name">
             <CityWeather />

@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8d14af5319c7cd7ab92e3613a179f458",
+    "revision": "6a579e63e631e40c4bd287f9b5e05957",
     "url": "/k1weather/index.html"
   },
   {
@@ -16,23 +16,23 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/k1weather/static/js/3.c11d8d25.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8722823175845086727e",
-    "url": "/k1weather/static/js/4.ef11a645.chunk.js"
+    "revision": "0ac8620305405a8e65f6",
+    "url": "/k1weather/static/js/4.dad1168c.chunk.js"
   },
   {
-    "revision": "de6f03b3f8bbb3c1aa2d",
-    "url": "/k1weather/static/js/5.16c3b6a3.chunk.js"
+    "revision": "eb6799cef639a3250842",
+    "url": "/k1weather/static/js/5.67089eb1.chunk.js"
   },
   {
     "revision": "403ab34db8b31b150170",
     "url": "/k1weather/static/js/6.25050ada.chunk.js"
   },
   {
-    "revision": "d464b514424d69ac2701",
-    "url": "/k1weather/static/js/main.9c998f64.chunk.js"
+    "revision": "13ed4a720fb4c1aaedb2",
+    "url": "/k1weather/static/js/main.921a930b.chunk.js"
   },
   {
-    "revision": "04daf69f9d7d9bdbf6ff",
-    "url": "/k1weather/static/js/runtime-main.5a2acbed.js"
+    "revision": "81292f301e558cfab564",
+    "url": "/k1weather/static/js/runtime-main.e25620fb.js"
   }
 ]);

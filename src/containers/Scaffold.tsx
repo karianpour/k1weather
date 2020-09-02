@@ -34,6 +34,9 @@ const useStyles = createUseStyles<Theme>(theme => ({
     color: theme.primary.text,
     backgroundColor: theme.primary.main,
   },
+  home: {
+    color: theme.primary.text,
+  },
   footer: {
     marginTop: 24,
     color: theme.secondary.text,
@@ -54,7 +57,7 @@ const Scaffold: React.FC = ({children}) => {
     <div className={classes.root}>
       <header className={classes.header}>
         <Lookup/>
-        <Link to="/">
+        <Link to="/" className={classes.home}>
           <HomeIcon/>
         </Link>
       </header>

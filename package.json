@@ -16,6 +16,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/react-transition-group": "^4.4.0",
     "clsx": "^1.1.1",
+    "gh-pages": "^3.1.0",
     "i18next": "^19.7.0",
     "mobx": "^5.15.6",
     "mobx-react-lite": "^2.2.0",
@@ -29,10 +30,12 @@
     "react-transition-group": "^4.4.1",
     "typescript": "^3.7.5"
   },
+  "homepage": "http://karianpour.github.io/k1weather",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "rm -rf ./docs && mv build docs && touch docs/CNAME && echo weather.karianpour.ir > docs/CNAME",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "analyze": "source-map-explorer 'docs/static/js/*.js'"
   },

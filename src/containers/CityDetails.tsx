@@ -17,7 +17,9 @@ const useStyles = createUseStyles<Theme>(theme => ({
     justifyContent: 'space-between',
     minHeight: 300,
     borderRadius: '4px',
-    border: `1px solid ${theme.border.main}`,
+    // border: `1px solid ${theme.border.main}`,
+    boxShadow: theme.shadow.paper,
+    backgroundColor: theme.background.paper,
     padding: 12,
   },
   actions: {
@@ -29,6 +31,9 @@ const useStyles = createUseStyles<Theme>(theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     padding: '8px 0',
+  },
+  favorite: {
+    color: theme.action.favorite,
   },
   temperature: {
     fontSize: 24,
@@ -88,7 +93,6 @@ const useStyles = createUseStyles<Theme>(theme => ({
     marginTop: 8,
     maxHeight: 200,
     overflow: 'auto',
-    backgroundColor: theme.background.main,
   },
   note: {
     marginTop: 8,
@@ -178,8 +182,8 @@ const CityDetails: React.FC<{city: ICityState}> = observer(({city}) => {
 
         <div className={classes.actions}>
           {weather && <IconButton onClick={toggleEditNote}><EditIcon/></IconButton>}
-          {weather && favorite && <IconButton onClick={removeFromFavorite}><FavoriteIcon/></IconButton>}
-          {weather && !favorite && <IconButton onClick={addToFavorite}><FavoriteOutlineIcon/></IconButton>}
+          {weather && favorite && <IconButton className={classes.favorite} onClick={removeFromFavorite}><FavoriteIcon/></IconButton>}
+          {weather && !favorite && <IconButton className={classes.favorite} onClick={addToFavorite}><FavoriteOutlineIcon/></IconButton>}
         </div>
       </>}
       {!city && <span>...</span>}

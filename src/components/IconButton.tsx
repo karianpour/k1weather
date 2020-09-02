@@ -10,7 +10,7 @@ const useStyles = createUseStyles<Theme>(theme => ({
     padding: 8,
     borderRadius: '50%',
     overflow: 'visible', // Explicitly set the default value to solve a bug on IE 11.
-    color: theme.action.active,
+    color: theme.icon.main,
     border: 0,
     margin: '0 4px',
     cursor: 'pointer',

@@ -1,6 +1,8 @@
 import React from 'react';
 import { createUseStyles, useTheme, Theme } from '../theme';
 import Lookup from './Lookup';
+import { Link } from 'react-router-dom';
+import { HomeIcon } from '../components/icons/HomeIcon';
 
 const useStyles = createUseStyles<Theme>(theme => ({
   root: {
@@ -25,6 +27,7 @@ const useStyles = createUseStyles<Theme>(theme => ({
   header: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
     height: 48,
     padding: 8,
     marginBottom: 16,
@@ -36,7 +39,7 @@ const useStyles = createUseStyles<Theme>(theme => ({
     color: theme.secondary.text,
     backgroundColor: theme.secondary.main,
     fontSize: 12,
-    padding: '0 12px',
+    padding: '6px 12px',
     '& a':{
       color: theme.background.main,
     }
@@ -51,6 +54,9 @@ const Scaffold: React.FC = ({children}) => {
     <div className={classes.root}>
       <header className={classes.header}>
         <Lookup/>
+        <Link to="/">
+          <HomeIcon/>
+        </Link>
       </header>
       <div className={classes.container}>
         {children}

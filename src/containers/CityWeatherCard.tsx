@@ -14,8 +14,10 @@ const useStyles = createUseStyles<Theme>(theme => ({
     margin: 8,
     padding: '16px',
     borderRadius: '4px',
-    border: `1px solid ${theme.border.main}`,
+    // border: `1px solid ${theme.border.main}`,
     width: 'calc(33% - 14px)',
+    boxShadow: theme.shadow.paper,
+    backgroundColor: theme.background.paper,
   },
   '@media (max-width: 1024px)': {
     root: {
@@ -31,6 +33,9 @@ const useStyles = createUseStyles<Theme>(theme => ({
     display: 'flex',
     justifyContent: 'flex-end',
     padding: '24px 0px 8px 8px',
+  },
+  favorite: {
+    color: theme.action.favorite,
   },
   row: {
     display: 'flex',
@@ -88,8 +93,8 @@ const CityWeatherCard: React.FC<{city: ICityState, inFavorite?: boolean, inTopCi
           {!weather && <span>...</span>}
         </div>
         <div className={classes.actions}>
-          {inFavorite && isFavorite && <IconButton onClick={removeFromFavorite}><FavoriteIcon/></IconButton>}
-          {inTopCity && !isFavorite && <IconButton onClick={addToFavorite}><FavoriteOutlineIcon/></IconButton>}
+          {inFavorite && isFavorite && <IconButton onClick={removeFromFavorite} className={classes.favorite}><FavoriteIcon/></IconButton>}
+          {inTopCity && !isFavorite && <IconButton onClick={addToFavorite} className={classes.favorite}><FavoriteOutlineIcon/></IconButton>}
           {inTopCity && !isFavorite && <IconButton onClick={removeFromTopCity}><DeleteIcon/></IconButton>}
         </div>
       </Link>

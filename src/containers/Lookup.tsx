@@ -47,6 +47,7 @@ const useStyles = createUseStyles<Theme>(theme => ({
   },
   icon: {
     color: theme.primary.text,
+    backgroundColor: theme.primary.dark,
   },
   query: {
     border: 0,

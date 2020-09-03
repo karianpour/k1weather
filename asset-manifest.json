@@ -2,26 +2,26 @@
   "files": {
     "static/js/0.41926174.chunk.js": "/k1weather/static/js/0.41926174.chunk.js",
     "static/js/0.41926174.chunk.js.map": "/k1weather/static/js/0.41926174.chunk.js.map",
-    "main.js": "/k1weather/static/js/main.567bd03e.chunk.js",
-    "main.js.map": "/k1weather/static/js/main.567bd03e.chunk.js.map",
-    "runtime-main.js": "/k1weather/static/js/runtime-main.60009063.js",
-    "runtime-main.js.map": "/k1weather/static/js/runtime-main.60009063.js.map",
-    "static/js/3.c11d8d25.chunk.js": "/k1weather/static/js/3.c11d8d25.chunk.js",
-    "static/js/3.c11d8d25.chunk.js.map": "/k1weather/static/js/3.c11d8d25.chunk.js.map",
-    "static/js/4.fa55df71.chunk.js": "/k1weather/static/js/4.fa55df71.chunk.js",
-    "static/js/4.fa55df71.chunk.js.map": "/k1weather/static/js/4.fa55df71.chunk.js.map",
-    "static/js/5.108f9474.chunk.js": "/k1weather/static/js/5.108f9474.chunk.js",
-    "static/js/5.108f9474.chunk.js.map": "/k1weather/static/js/5.108f9474.chunk.js.map",
+    "main.js": "/k1weather/static/js/main.bfa52a54.chunk.js",
+    "main.js.map": "/k1weather/static/js/main.bfa52a54.chunk.js.map",
+    "runtime-main.js": "/k1weather/static/js/runtime-main.837fcb10.js",
+    "runtime-main.js.map": "/k1weather/static/js/runtime-main.837fcb10.js.map",
+    "static/js/3.8602e824.chunk.js": "/k1weather/static/js/3.8602e824.chunk.js",
+    "static/js/3.8602e824.chunk.js.map": "/k1weather/static/js/3.8602e824.chunk.js.map",
+    "static/js/4.08a9ced5.chunk.js": "/k1weather/static/js/4.08a9ced5.chunk.js",
+    "static/js/4.08a9ced5.chunk.js.map": "/k1weather/static/js/4.08a9ced5.chunk.js.map",
+    "static/js/5.892c3a96.chunk.js": "/k1weather/static/js/5.892c3a96.chunk.js",
+    "static/js/5.892c3a96.chunk.js.map": "/k1weather/static/js/5.892c3a96.chunk.js.map",
     "static/js/6.25050ada.chunk.js": "/k1weather/static/js/6.25050ada.chunk.js",
     "static/js/6.25050ada.chunk.js.map": "/k1weather/static/js/6.25050ada.chunk.js.map",
     "index.html": "/k1weather/index.html",
-    "precache-manifest.35f2025e076316c171fc8a9093e5b442.js": "/k1weather/precache-manifest.35f2025e076316c171fc8a9093e5b442.js",
+    "precache-manifest.ec5eb6c80f5ff737716525015b630dba.js": "/k1weather/precache-manifest.ec5eb6c80f5ff737716525015b630dba.js",
     "service-worker.js": "/k1weather/service-worker.js",
-    "static/js/3.c11d8d25.chunk.js.LICENSE.txt": "/k1weather/static/js/3.c11d8d25.chunk.js.LICENSE.txt"
+    "static/js/3.8602e824.chunk.js.LICENSE.txt": "/k1weather/static/js/3.8602e824.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.60009063.js",
-    "static/js/3.c11d8d25.chunk.js",
-    "static/js/main.567bd03e.chunk.js"
+    "static/js/runtime-main.837fcb10.js",
+    "static/js/3.8602e824.chunk.js",
+    "static/js/main.bfa52a54.chunk.js"
   ]
 }

@@ -9,6 +9,7 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { WindIcon } from '../components/icons/WindIcon';
 import { EditIcon } from '../components/icons/EditIcon';
+import { LoadingIndicator } from '../components/LoagingIndicator';
 
 const useStyles = createUseStyles<Theme>(theme => ({
   root: {
@@ -193,7 +194,7 @@ const CityDetails: React.FC<{city: ICityState}> = observer(({city}) => {
           {weather && !favorite && <IconButton className={classes.favorite} onClick={addToFavorite}><FavoriteOutlineIcon/></IconButton>}
         </div>
       </>}
-      {!city && <span>...</span>}
+      {!city && <LoadingIndicator />}
     </div>
   );
 });

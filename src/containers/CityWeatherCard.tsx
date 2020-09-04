@@ -8,6 +8,7 @@ import { IconButton } from '../components/IconButton';
 import { FavoriteIcon } from '../components/icons/FavoriteIcon';
 import { FavoriteOutlineIcon } from '../components/icons/FavoriteOutlineIcon';
 import clsx from 'clsx';
+import { LoadingIndicator } from '../components/LoagingIndicator';
 
 const useStyles = createUseStyles<Theme>(theme => ({
   root: {
@@ -97,7 +98,7 @@ const CityWeatherCard: React.FC<{city: ICityState, inFavorite?: boolean, inTopCi
           {weather && <div>
             <div className={clsx(classes.temperature, weather.temp_c > 0 ? classes.positive : classes.negative)}>{weather.temp_c > 0 && ('+')}{weather.temp_c}&deg;</div>
           </div>}
-          {!weather && <span>...</span>}
+          {!weather && <LoadingIndicator />}
         </div>
         <div className={classes.actions}>
           {inFavorite && isFavorite && <IconButton onClick={removeFromFavorite} className={classes.favorite}><FavoriteIcon/></IconButton>}

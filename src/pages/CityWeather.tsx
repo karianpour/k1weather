@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import Scaffold from '../containers/Scaffold';
 import CityDetails from '../containers/CityDetails';
 import { useTranslation } from 'react-i18next';
+import { LoadingIndicator } from '../components/LoagingIndicator';
 
 const useStyles = createUseStyles<Theme>(theme => ({
   title: {
@@ -41,7 +42,7 @@ const CityWeather: React.FC = observer(() => {
     <Scaffold>
       <h1 className={classes.title}>{t('city_weather_details')}</h1>
       {city && <CityDetails city={city}/>}
-      {!city && <span>loading...</span>}
+      {!city && <LoadingIndicator />}
     </Scaffold>
   );
 });

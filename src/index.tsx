@@ -1,15 +1,16 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import App, { DefaultLoadingIndicator } from './App';
+import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ThemeProvider } from 'react-jss';
 import {lightTheme} from './theme';
 import './locale/i18n';
+import { LoadingIndicator } from './components/LoagingIndicator';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={lightTheme}>
-      <Suspense fallback={<DefaultLoadingIndicator />}>
+      <Suspense fallback={<LoadingIndicator />}>
         <App />
       </Suspense>
     </ThemeProvider>

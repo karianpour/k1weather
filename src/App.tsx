@@ -61,9 +61,3 @@ const App: React.FC = () => {
 }
 
 export default App;
-
-export const DefaultLoadingIndicator = () => (
-  <div>
-    Loading...
-  </div>
-);

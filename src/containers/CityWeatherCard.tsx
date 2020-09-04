@@ -43,6 +43,10 @@ const useStyles = createUseStyles<Theme>(theme => ({
     padding: '8px 0',
     alignItems: 'center',
   },
+  date: {
+    fontSize: 10,
+    color: theme.text.secondary,
+  },
   temperature: {
     fontSize: 24,
   },
@@ -86,7 +90,10 @@ const CityWeatherCard: React.FC<{city: ICityState, inFavorite?: boolean, inTopCi
     <div className={classes.root}>
       <Link to={`/city/${city.country}/${city.region}/${city.name}`}>
         <div className={classes.row}>
-          <h3>{city.name}</h3>
+          <div>
+            <h3>{city.name}</h3>
+            {weather && <div className={classes.date}>{weather.lastUpdate.toLocaleString()}</div>}            
+          </div>
           {weather && <div>
             <div className={clsx(classes.temperature, weather.temp_c > 0 ? classes.positive : classes.negative)}>{weather.temp_c > 0 && ('+')}{weather.temp_c}&deg;</div>
           </div>}

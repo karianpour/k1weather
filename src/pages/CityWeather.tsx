@@ -25,7 +25,7 @@ const CityWeather: React.FC = observer(() => {
   const city = state.findCity(country, region, name);
 
   React.useEffect(() => {
-    if(!city) {
+    if(!city || !city.isUpdated(new Date())) {
       (async () => {
         const newCity = await state.fetchCity(name);
         if(newCity){

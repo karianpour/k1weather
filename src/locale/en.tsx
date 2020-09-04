@@ -16,5 +16,6 @@ export const en = {
     "mm": "mm",
     "mb": "hPa",
     "note": "Note",
+    "version": "Version",
   }
 }

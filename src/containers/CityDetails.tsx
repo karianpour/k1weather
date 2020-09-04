@@ -32,6 +32,10 @@ const useStyles = createUseStyles<Theme>(theme => ({
     justifyContent: 'space-between',
     padding: '8px 0',
   },
+  date: {
+    alignSelf: 'center',
+    color: theme.text.secondary,
+  },
   favorite: {
     color: theme.action.favorite,
   },
@@ -141,9 +145,12 @@ const CityDetails: React.FC<{city: ICityState}> = observer(({city}) => {
     <div className={classes.root}>
       {city && <>
         <div>
-          <h2>
-            {city.name}
-          </h2>
+          <div className={classes.row}>
+            <h2>
+              {city.name}
+            </h2>
+            {weather && <div className={classes.date}>{weather.lastUpdate.toLocaleString()}</div>}
+          </div>
           {weather && <>
             <div className={classes.row}>
               <div>

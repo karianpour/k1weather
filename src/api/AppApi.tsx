@@ -60,7 +60,7 @@ export class AppApi {
       })).sort((a, b) => a.name.localeCompare(b.name));
       return cities;
     } catch (err) {
-      console.log(err);
+      this.errorHandler(err);
     }
   }
 
@@ -109,7 +109,7 @@ export class AppApi {
       };
       return weather;
     } catch (err) {
-      console.log(err);
+      this.errorHandler(err);
     }
   }
 
@@ -135,8 +135,19 @@ export class AppApi {
       }));
       return cities;
     } catch (err) {
+      this.errorHandler(err);
+    }
+  }
+
+  errorHandler (err: any){
+    debugger
+    if(err.message?.includes('NetworkError') || err.message?.includes('Failed to fetch')){
+      throw new Error('NetworkError');
+    }else{
       console.log(err);
+      throw new Error('UnknownError');
     }
   }
 
 }
+

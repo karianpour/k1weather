@@ -36,8 +36,11 @@ export const WeatherState = types
     "gust_kph": types.number,
     updated_at: types.Date,
   })
-  .actions(self => {
+  .views(self => {
     return {
+      get lastUpdate () {
+        return new Date(self.last_updated_epoch *  1000);
+      },
     }
   });
 
@@ -88,6 +91,7 @@ export const AppState = types
     lookup: types.optional(types.string, ''),
     lookupResult: types.array(LookupResultState),
     lookupActiveIndex: types.maybeNull(types.number),
+    offline: types.optional(types.boolean, false),
   })
   .views(self => {
     return {
@@ -99,6 +103,12 @@ export const AppState = types
   })
   .actions(self => {
     return {
+      setOffline() {
+        !self.offline && (self.offline = true);
+      },
+      setOnline() {
+        self.offline && (self.offline = false);
+      },
       addToTopCity(city: ICityState) {
         const index = self.topCities.findIndex( c => c.name.localeCompare(city.name) > 0);
         if(index === -1){
@@ -174,9 +184,16 @@ export const AppState = types
       async setLookup(query: string) {
         self.lookup = query;
         if(query){
-          const result = await getEnv<EnvType>(self).api.fetchLookup(query);
-          if(self.lookup === query){
-            self.setLookupResult(result);
+          try{
+            const result = await getEnv<EnvType>(self).api.fetchLookup(query);
+              self.setOnline();
+            if(self.lookup === query){
+              self.setLookupResult(result);
+            }
+          }catch(err){
+            if(err.message === 'NetworkError'){
+              self.setOffline();
+            }
           }
         }else{
           self.setLookupResult(undefined);
@@ -189,16 +206,23 @@ export const AppState = types
           if(city.isUpdated(now)){
             return;
           }
-          const weather = await api.fetchWeatherForCity(city.name);
-          if(weather){
-            if(`${weather.city.country}/${weather.city.region}/${weather.city.name}` === city.id){
-              city.setCurrentWeather(weather);
-            }else{
-              const addedCity = self.addCityWeather(weather);
-              self.removeFromTopCity(city);
-              self.removeFromFavorite(city);
-              self.removeCityWeather(city);
-              self.addToTopCity(addedCity);
+          try{
+            const weather = await api.fetchWeatherForCity(city.name);
+            self.setOnline();
+            if(weather){
+              if(`${weather.city.country}/${weather.city.region}/${weather.city.name}` === city.id){
+                city.setCurrentWeather(weather);
+              }else{
+                const addedCity = self.addCityWeather(weather);
+                self.removeFromTopCity(city);
+                self.removeFromFavorite(city);
+                self.removeCityWeather(city);
+                self.addToTopCity(addedCity);
+              }
+            }
+          }catch(err){
+            if(err.message === 'NetworkError'){
+              self.setOffline();
             }
           }
         }));
@@ -209,18 +233,32 @@ export const AppState = types
     return {
       async init() {
         if(!self.topCities?.length){
-          const cities = await getEnv<EnvType>(self).api.fetchTopCities();
-          if(cities){
-            self.setTopCities(cities);
+          try{
+            const cities = await getEnv<EnvType>(self).api.fetchTopCities();
+            self.setOnline();
+            if(cities){
+              self.setTopCities(cities);
+            }
+          }catch(err){
+            if(err.message === 'NetworkError'){
+              self.setOffline();
+            }
           }
         }
         await self.updateCurrentWeather();
       },
       async fetchCity(cityName: string): Promise<ICityState | undefined>{
-        const weather = await getEnv<EnvType>(self).api.fetchWeatherForCity(cityName);
-        if(weather){
-          const city = self.addCityWeather(weather);
-          return city;
+        try{
+          const weather = await getEnv<EnvType>(self).api.fetchWeatherForCity(cityName);
+          self.setOnline();
+          if(weather){
+            const city = self.addCityWeather(weather);
+            return city;
+          }
+        }catch(err){
+          if(err.message === 'NetworkError'){
+            self.setOffline();
+          }
         }
       }
     }

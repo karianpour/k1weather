@@ -1,29 +1,29 @@
 {
   "files": {
-    "static/js/0.9e9c00dd.chunk.js": "/k1weather/static/js/0.9e9c00dd.chunk.js",
-    "static/js/0.9e9c00dd.chunk.js.map": "/k1weather/static/js/0.9e9c00dd.chunk.js.map",
-    "main.js": "/k1weather/static/js/main.0f171de8.chunk.js",
-    "main.js.map": "/k1weather/static/js/main.0f171de8.chunk.js.map",
-    "runtime-main.js": "/k1weather/static/js/runtime-main.bdc1251c.js",
-    "runtime-main.js.map": "/k1weather/static/js/runtime-main.bdc1251c.js.map",
-    "static/js/3.5c34a26f.chunk.js": "/k1weather/static/js/3.5c34a26f.chunk.js",
-    "static/js/3.5c34a26f.chunk.js.map": "/k1weather/static/js/3.5c34a26f.chunk.js.map",
-    "static/js/4.27cf5134.chunk.js": "/k1weather/static/js/4.27cf5134.chunk.js",
-    "static/js/4.27cf5134.chunk.js.map": "/k1weather/static/js/4.27cf5134.chunk.js.map",
-    "static/js/5.0e7000bf.chunk.js": "/k1weather/static/js/5.0e7000bf.chunk.js",
-    "static/js/5.0e7000bf.chunk.js.map": "/k1weather/static/js/5.0e7000bf.chunk.js.map",
-    "static/js/6.85ec637c.chunk.js": "/k1weather/static/js/6.85ec637c.chunk.js",
-    "static/js/6.85ec637c.chunk.js.map": "/k1weather/static/js/6.85ec637c.chunk.js.map",
+    "static/js/0.7c741aac.chunk.js": "/k1weather/static/js/0.7c741aac.chunk.js",
+    "static/js/0.7c741aac.chunk.js.map": "/k1weather/static/js/0.7c741aac.chunk.js.map",
+    "main.js": "/k1weather/static/js/main.12e39a20.chunk.js",
+    "main.js.map": "/k1weather/static/js/main.12e39a20.chunk.js.map",
+    "runtime-main.js": "/k1weather/static/js/runtime-main.1923848c.js",
+    "runtime-main.js.map": "/k1weather/static/js/runtime-main.1923848c.js.map",
+    "static/js/3.0652029c.chunk.js": "/k1weather/static/js/3.0652029c.chunk.js",
+    "static/js/3.0652029c.chunk.js.map": "/k1weather/static/js/3.0652029c.chunk.js.map",
+    "static/js/4.f13e8c74.chunk.js": "/k1weather/static/js/4.f13e8c74.chunk.js",
+    "static/js/4.f13e8c74.chunk.js.map": "/k1weather/static/js/4.f13e8c74.chunk.js.map",
+    "static/js/5.416d57db.chunk.js": "/k1weather/static/js/5.416d57db.chunk.js",
+    "static/js/5.416d57db.chunk.js.map": "/k1weather/static/js/5.416d57db.chunk.js.map",
+    "static/js/6.7fa327a8.chunk.js": "/k1weather/static/js/6.7fa327a8.chunk.js",
+    "static/js/6.7fa327a8.chunk.js.map": "/k1weather/static/js/6.7fa327a8.chunk.js.map",
     "static/js/7.29971295.chunk.js": "/k1weather/static/js/7.29971295.chunk.js",
     "static/js/7.29971295.chunk.js.map": "/k1weather/static/js/7.29971295.chunk.js.map",
     "index.html": "/k1weather/index.html",
-    "precache-manifest.9d8f12b84cbc1302ec2bd4b54d39373c.js": "/k1weather/precache-manifest.9d8f12b84cbc1302ec2bd4b54d39373c.js",
+    "precache-manifest.b44ac528744b0d0495f887f86231694c.js": "/k1weather/precache-manifest.b44ac528744b0d0495f887f86231694c.js",
     "service-worker.js": "/k1weather/service-worker.js",
-    "static/js/3.5c34a26f.chunk.js.LICENSE.txt": "/k1weather/static/js/3.5c34a26f.chunk.js.LICENSE.txt"
+    "static/js/3.0652029c.chunk.js.LICENSE.txt": "/k1weather/static/js/3.0652029c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.bdc1251c.js",
-    "static/js/3.5c34a26f.chunk.js",
-    "static/js/main.0f171de8.chunk.js"
+    "static/js/runtime-main.1923848c.js",
+    "static/js/3.0652029c.chunk.js",
+    "static/js/main.12e39a20.chunk.js"
   ]
 }

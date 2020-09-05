@@ -17,5 +17,12 @@ export const en = {
     "mb": "hPa",
     "note": "Note",
     "version": "Version",
+    "showCurrentLocationWeather": "Show Weather For My Current Location",
+    "currentLocationWeather": "Weather For My Current Location",
+    "no_weather_for_your_location": "No Weather For Your Location",
+    "permission_denied": "Permission Denied",
+    "position_unavailable": "Position Unavailable",
+    "timeout": "Timeout",
+    "no_location_service": "No location service",
   }
 }

@@ -10,6 +10,7 @@ import { AppStateProvider } from './state/weather-state';
 const NoMatch = lazy(() => import('./pages/NoMatch'));
 const Home = lazy(() => import('./pages/Home'));
 const CityWeather = lazy(() => import('./pages/CityWeather'));
+const CurrentLocationWeather = lazy(() => import('./pages/CurrentLocationWeather'));
 
 const useStyles = createUseStyles<Theme>(theme => ({
   '@global': {
@@ -47,6 +48,9 @@ const App: React.FC = () => {
         <Switch>
           <Route path="/city/:country/:region/:name">
             <CityWeather />
+          </Route>
+          <Route path="/currentLocation">
+            <CurrentLocationWeather />
           </Route>
           <Route path="/">
             <Home />

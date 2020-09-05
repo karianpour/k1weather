@@ -109,42 +109,6 @@ export const AppState = types
       setOnline() {
         self.offline && (self.offline = false);
       },
-      async currentLocationWeather(): Promise<ICityState> {
-        if(!navigator.geolocation){
-          throw new Error('no_location_service');
-        }
-        debugger;
-        const position = await new Promise<Position>((resolve, rejected) => {
-          navigator.geolocation.getCurrentPosition((position) => {
-            resolve(position);
-          }, (err) => {
-            if(err.code === err.PERMISSION_DENIED){
-              rejected(new Error('permission_denied'));
-            }
-            if(err.code === err.POSITION_UNAVAILABLE){
-              rejected(new Error('position_unavailable'));
-            }
-            if(err.code === err.TIMEOUT){
-              rejected(new Error('timeout'));
-            }
-          }, {
-            enableHighAccuracy: false,
-            timeout: 60 * 100,
-          });
-        });
-        const weather = await getEnv<EnvType>(self).api.fetchWeatherForLocation(position.coords.latitude, position.coords.longitude);
-        if(weather){
-          return CityState.create({
-            id: `${weather.city.country}/${weather.city.region}/${weather.city.name}`,
-            name: weather.city.name,
-            country: weather.city.country,
-            region: weather.city.region,
-            currentWeather: WeatherState.create(weather.current),
-          });
-        }else{
-          throw new Error('no_weather_for_your_location');
-        }
-      },
       addToTopCity(city: ICityState) {
         const index = self.topCities.findIndex( c => c.name.localeCompare(city.name) > 0);
         if(index === -1){
@@ -262,6 +226,36 @@ export const AppState = types
             }
           }
         }));
+      },
+      async currentLocationWeather(): Promise<ICityState> {
+        if(!navigator.geolocation){
+          throw new Error('no_location_service');
+        }
+        const position = await new Promise<Position>((resolve, rejected) => {
+          navigator.geolocation.getCurrentPosition((position) => {
+            resolve(position);
+          }, (err) => {
+            if(err.code === err.PERMISSION_DENIED){
+              rejected(new Error('permission_denied'));
+            }
+            if(err.code === err.POSITION_UNAVAILABLE){
+              rejected(new Error('position_unavailable'));
+            }
+            if(err.code === err.TIMEOUT){
+              rejected(new Error('timeout'));
+            }
+          }, {
+            enableHighAccuracy: false,
+            timeout: 60 * 100,
+          });
+        });
+        const weather = await getEnv<EnvType>(self).api.fetchWeatherForLocation(position.coords.latitude, position.coords.longitude);
+        if(weather){
+          const city = self.addCityWeather(weather);
+          return city;
+        }else{
+          throw new Error('no_weather_for_your_location');
+        }
       },
     }
   })

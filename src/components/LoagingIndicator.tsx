@@ -5,8 +5,8 @@ import { LoadingIcon } from './icons/LoadingIcon';
 const useStyles = createUseStyles<Theme>(theme => ({
   loading: {
     color: theme.primary.main,
-    width: 150,
-    heigh: 150,
+    width: 50,
+    heigh: 50,
   },
 }));
 

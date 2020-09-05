@@ -5,7 +5,7 @@ import { useAppState } from '../state/weather-state';
 import FavoriteCityList from '../containers/FavoriteCityList';
 import Scaffold from '../containers/Scaffold';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { LinkButton } from '../components/LinkButton';
 
 // const useStyles = createUseStyles<Theme>(theme => ({
 //   root: {
@@ -28,7 +28,7 @@ const Home: React.FC = () => {
   return (
     <Scaffold>
       <h1>{t('home')}</h1>
-      <Link to='/currentLocation'>{t('showCurrentLocationWeather')}</Link>
+      <LinkButton to='/currentLocation'>{t('showCurrentLocationWeather')}</LinkButton>
       <FavoriteCityList/>
       <TopCityList/>
     </Scaffold>

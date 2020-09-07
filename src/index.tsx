@@ -5,7 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import { ThemeProvider } from 'react-jss';
 import {lightTheme} from './theme';
 import './locale/i18n';
-import { LoadingIndicator } from './components/LoagingIndicator';
+import LoadingIndicator from './components/LoagingIndicator';
 
 ReactDOM.render(
   <React.StrictMode>

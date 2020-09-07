@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-export const LoadingIcon: React.FC<any> = ({ ...props }) => {
+const LoadingIcon: React.FC<any> = ({ ...props }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" style={{margin:'auto', display:'block'}} viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" {...props}>
       <g transform="rotate(0 50 50)">
@@ -62,3 +61,5 @@ export const LoadingIcon: React.FC<any> = ({ ...props }) => {
     </svg>
   )
 }
+
+export default LoadingIcon;

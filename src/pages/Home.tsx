@@ -1,18 +1,10 @@
 import React from 'react';
-// import { createUseStyles, useTheme, Theme } from '../theme';
 import TopCityList from '../containers/TopCityList';
 import { useAppState } from '../state/weather-state';
 import FavoriteCityList from '../containers/FavoriteCityList';
 import Scaffold from '../containers/Scaffold';
 import { useTranslation } from 'react-i18next';
-import { LinkButton } from '../components/LinkButton';
-
-// const useStyles = createUseStyles<Theme>(theme => ({
-//   root: {
-//     backgroundColor: theme.colorPrimary,
-//     color: theme.textPrimary,
-//   },
-// }));
+import LinkButton from '../components/LinkButton';
 
 const Home: React.FC = () => {
 
@@ -22,8 +14,6 @@ const Home: React.FC = () => {
   React.useEffect(()=>{
     state.init();
   });
-  // const theme = useTheme();
-  // const classes = useStyles({theme});
 
   return (
     <Scaffold>

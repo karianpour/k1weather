@@ -1,17 +1,9 @@
 import React from 'react';
-// import { createUseStyles, useTheme, Theme } from '../theme';
 import { useAppState, ICityState } from '../state/weather-state';
 import Scaffold from '../containers/Scaffold';
 import { useTranslation } from 'react-i18next';
 import CityDetails from '../containers/CityDetails';
-import { LoadingIndicator } from '../components/LoagingIndicator';
-
-// const useStyles = createUseStyles<Theme>(theme => ({
-//   root: {
-//     backgroundColor: theme.colorPrimary,
-//     color: theme.textPrimary,
-//   },
-// }));
+import LoadingIndicator from '../components/LoagingIndicator';
 
 const CurrentLocationWeather: React.FC = () => {
 
@@ -20,8 +12,6 @@ const CurrentLocationWeather: React.FC = () => {
   const [ city, setCity ] = React.useState<ICityState | undefined>(undefined);
   const [ error, setError ] = React.useState<string>('');
 
-  // const theme = useTheme();
-  // const classes = useStyles({theme});
 
   React.useEffect(()=> {
     (async ()=> {

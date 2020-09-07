@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import Scaffold from '../containers/Scaffold';
 import CityDetails from '../containers/CityDetails';
 import { useTranslation } from 'react-i18next';
-import { LoadingIndicator } from '../components/LoagingIndicator';
+import LoadingIndicator from '../components/LoagingIndicator';
 
 const useStyles = createUseStyles<Theme>(theme => ({
   title: {

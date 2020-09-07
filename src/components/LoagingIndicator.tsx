@@ -1,6 +1,6 @@
 import React from 'react';
 import { createUseStyles, useTheme, Theme } from '../theme';
-import { LoadingIcon } from './icons/LoadingIcon';
+import LoadingIcon from './icons/LoadingIcon';
 
 const useStyles = createUseStyles<Theme>(theme => ({
   loading: {
@@ -10,7 +10,7 @@ const useStyles = createUseStyles<Theme>(theme => ({
   },
 }));
 
-export const LoadingIndicator = () => {
+const LoadingIndicator = () => {
   const theme = useTheme();
   const classes = useStyles({ theme });
   return (
@@ -19,3 +19,5 @@ export const LoadingIndicator = () => {
     </div>
   )
 };
+
+export default LoadingIndicator;

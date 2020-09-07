@@ -2,14 +2,14 @@ import React from 'react';
 import { createUseStyles, useTheme, Theme } from '../theme';
 import { observer } from 'mobx-react-lite';
 import { ICityState, useAppState } from '../state/weather-state';
-import { IconButton } from '../components/IconButton';
-import { FavoriteIcon } from '../components/icons/FavoriteIcon';
-import { FavoriteOutlineIcon } from '../components/icons/FavoriteOutlineIcon';
+import IconButton from '../components/IconButton';
+import FavoriteIcon from '../components/icons/FavoriteIcon';
+import FavoriteOutlineIcon from '../components/icons/FavoriteOutlineIcon';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { WindIcon } from '../components/icons/WindIcon';
-import { EditIcon } from '../components/icons/EditIcon';
-import { LoadingIndicator } from '../components/LoagingIndicator';
+import WindIcon from '../components/icons/WindIcon';
+import EditIcon from '../components/icons/EditIcon';
+import LoadingIndicator from '../components/LoagingIndicator';
 
 const useStyles = createUseStyles<Theme>(theme => ({
   root: {

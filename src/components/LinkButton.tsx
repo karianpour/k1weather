@@ -26,7 +26,7 @@ const useStyles = createUseStyles<Theme>(theme => ({
   },
 }));
 
-export const LinkButton: React.FC<{to: string}> = ({children, ...rest}) => {
+const LinkButton: React.FC<{to: string}> = ({children, ...rest}) => {
   const theme = useTheme();
   const classes = useStyles({theme});
 
@@ -38,3 +38,5 @@ export const LinkButton: React.FC<{to: string}> = ({children, ...rest}) => {
     </Link>
   )
 }
+
+export default LinkButton;

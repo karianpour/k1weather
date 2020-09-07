@@ -3,7 +3,7 @@ import { createUseStyles, useTheme, Theme } from '../theme';
 import { useAppState } from '../state/weather-state';
 import { observer } from 'mobx-react-lite';
 import { debounce } from '../utils';
-import { SearchIcon } from '../components/icons/SearchIcon';
+import SearchIcon from '../components/icons/SearchIcon';
 import clsx from 'clsx';
 import { CSSTransition } from 'react-transition-group';
 import { useFadeTransitionStyles } from '../components/transitions';

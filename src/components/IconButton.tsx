@@ -31,7 +31,7 @@ const useStyles = createUseStyles<Theme>(theme => ({
   disabled: {},
 }));
 
-export const IconButton: React.FC<any> = ({children, className, ...rest}) => {
+const IconButton: React.FC<any> = ({children, className, ...rest}) => {
   const theme = useTheme();
   const classes = useStyles({theme});
 
@@ -41,3 +41,5 @@ export const IconButton: React.FC<any> = ({children, className, ...rest}) => {
     </button>
   )
 }
+
+export default IconButton;

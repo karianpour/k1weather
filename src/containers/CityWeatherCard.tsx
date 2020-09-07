@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { ICityState, useAppState } from '../state/weather-state';
 import { DeleteIcon } from '../components/icons/DeleteIcon';
-import { IconButton } from '../components/IconButton';
+import IconButton from '../components/IconButton';
 import { FavoriteIcon } from '../components/icons/FavoriteIcon';
 import { FavoriteOutlineIcon } from '../components/icons/FavoriteOutlineIcon';
 import clsx from 'clsx';

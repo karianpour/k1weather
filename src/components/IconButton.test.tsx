@@ -24,7 +24,6 @@ test('icon botton renders children', () => {
       <div data-testid='testDiv'/>
     </IconButton>
   );
-  const button = screen.getByRole("button");
   expect(screen.getByTestId(/testDiv/i)).toBeInTheDocument();
 });
 

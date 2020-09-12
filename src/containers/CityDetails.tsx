@@ -165,7 +165,7 @@ const CityDetails: React.FC<{city: ICityState}> = observer(({city}) => {
                 <img alt={weather.condition.text} src={weather.condition.icon}/>
               </div>
               <div className={classes.wind}>
-                <WindIcon style={{transform: `rotate(${weather.wind_degree}deg)`}}/>
+                <WindIcon role="windDirection" style={{transform: `rotate(${weather.wind_degree}deg)`}}/>
                 <div>{weather.wind_kph}&nbsp;{t('kph')}</div>
                 <div className={classes.gust}>{t('gust')}&nbsp;{weather.gust_kph}&nbsp;{t('kph')}</div>
               </div>
@@ -185,13 +185,13 @@ const CityDetails: React.FC<{city: ICityState}> = observer(({city}) => {
               <EditNote editing={editing} city={city}/>
             </div>
           </>}
-          {!weather && <>:D</>}
+          {!weather && <LoadingIndicator/>}
         </div>
 
         <div className={classes.actions}>
-          {weather && <IconButton onClick={toggleEditNote}><EditIcon/></IconButton>}
-          {weather && favorite && <IconButton className={classes.favorite} onClick={removeFromFavorite}><FavoriteIcon/></IconButton>}
-          {weather && !favorite && <IconButton className={classes.favorite} onClick={addToFavorite}><FavoriteOutlineIcon/></IconButton>}
+          {weather && <IconButton role="noteEdit" onClick={toggleEditNote}><EditIcon/></IconButton>}
+          {weather && favorite && <IconButton role="unfavorite" className={classes.favorite} onClick={removeFromFavorite}><FavoriteIcon/></IconButton>}
+          {weather && !favorite && <IconButton role="favorite" className={classes.favorite} onClick={addToFavorite}><FavoriteOutlineIcon/></IconButton>}
         </div>
       </>}
       {!city && <LoadingIndicator />}
@@ -225,7 +225,7 @@ const EditNote: React.FC<{editing: boolean, city: ICityState}> = ({editing, city
   return (
     <div className={clsx(classes.note, editing && classes.noteEditing)}>
       {editing && <>
-        <textarea defaultValue={city.note} onChange={handleChange} className={classes.noteArea}/>
+        <textarea role="note-textbox" defaultValue={city.note} onChange={handleChange} className={classes.noteArea}/>
       </>}
     </div>
   );

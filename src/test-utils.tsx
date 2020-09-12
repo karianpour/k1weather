@@ -7,6 +7,7 @@ import {
   BrowserRouter as Router,
 } from "react-router-dom";
 import { useLocalStore } from 'mobx-react-lite';
+import './locale/i18n';
 
 export const customRender = (ui: React.ReactElement, options?: Omit<RenderOptions & {store?: IAppState}, 'queries'>): RenderResult => {
   const AllTheProviders: React.FC = ({ children }) => {

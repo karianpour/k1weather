@@ -85,14 +85,14 @@ const CityWeatherCard: React.FC<{city: ICityState, inFavorite?: boolean, inTopCi
 
   const isFavorite = city?.isFavorite();
 
-  const weather = city.currentWeather;
+  const weather = city?.currentWeather;
 
   return (
     <div className={classes.root}>
-      <Link to={`/city/${city.country}/${city.region}/${city.name}`}>
+      <Link to={!city ? '/' : `/city/${city.country}/${city.region}/${city.name}`}>
         <div className={classes.row}>
           <div>
-            <h3>{city.name}</h3>
+            <h3>{city?.name}</h3>
             {weather && <div className={classes.date}>{weather.lastUpdate.toLocaleString()}</div>}            
           </div>
           {weather && <div>

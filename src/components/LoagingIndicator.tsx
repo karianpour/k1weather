@@ -14,7 +14,7 @@ const LoadingIndicator = () => {
   const theme = useTheme();
   const classes = useStyles({ theme });
   return (
-    <LoadingIcon className={classes.loading}/>
+    <LoadingIcon role="loading" className={classes.loading}/>
   )
 };
 

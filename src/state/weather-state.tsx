@@ -294,20 +294,20 @@ export const AppState = types
     }
   });
 
-const storeContext = React.createContext<IAppState | null>(null);
+export const AppStoreContext = React.createContext<IAppState | null>(null);
 
 export const AppStateProvider: React.FunctionComponent = ({ children }) => {
   const store = useLocalStore(createStore)
-  return <storeContext.Provider value={store}>{children}</storeContext.Provider>
+  return <AppStoreContext.Provider value={store}>{children}</AppStoreContext.Provider>
 }
 
 export const useAppState = () => {
-  const store = React.useContext(storeContext)
+  const store = React.useContext(AppStoreContext)
   if (!store) {
     // this is especially useful in TypeScript so you don't need to be checking for null all the time
     throw new Error('useStore must be used within a StoreProvider.')
   }
-  return store
+  return store;
 }
 
 export type EnvType = {
@@ -315,25 +315,49 @@ export type EnvType = {
 }
 
 export function createStore() {
-  const appStore = localStorage.getItem('app-store');
-
   const injection: EnvType = {
     api: new AppApi(),
   }
 
   let store;
   try {
-    store = AppState.create(appStore ? JSON.parse(appStore) : emptyStore(), injection);
+    store = AppState.create(createSnapshot(), injection);
   } catch (err) {
     console.error('could not restore, with the following error. fallback to empty store.');
     console.error(err);
     store = AppState.create(emptyStore(), injection);
   }
-  onSnapshot(store, snapshot => {
-    localStorage.setItem('app-store', JSON.stringify(snapshot));
-  });
+  onSnapshot(store, saveSnapshot);
 
   return store;
+}
+
+export function createTestStore(snapshot: IAppStateSnapshot): IAppState {
+  const injection: EnvType = {
+    api: new AppApi(),
+  }
+
+  const store = AppState.create(snapshot, injection);
+
+  return store;
+}
+
+export const SNAPSHOT_KEY = 'app-store';
+
+export function createSnapshot(): IAppStateSnapshot {
+  const snapshot = localStorage.getItem(SNAPSHOT_KEY);
+
+  try{
+    return snapshot ? JSON.parse(snapshot) : emptyStore();
+  } catch (err) {
+    console.error('could not restore, with the following error. fallback to empty store.');
+    console.error(err);
+    return emptyStore();
+  }
+}
+
+export function saveSnapshot(snapshot: IAppStateSnapshot) {
+  localStorage.setItem(SNAPSHOT_KEY, JSON.stringify(snapshot));
 }
 
 function emptyStore(): IAppStateSnapshot {

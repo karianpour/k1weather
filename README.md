@@ -52,3 +52,7 @@ To build the project
 ### `npm analyze`
 
 To analyze the js-boundles after building it.
+
+### `npm run deploy`
+
+To deploy on github pages

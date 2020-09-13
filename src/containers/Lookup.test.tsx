@@ -27,7 +27,6 @@ test('renders Lookup', async () => {
     await userEvent.type(input, 'city name');
     await new Promise((resolve) => setTimeout(resolve, 350));// the debounce time
     expect(store.lookup).toBe('city name');
-    await screen.findByText("City2");
 
     expect(screen.getByText("City2")).toBeInTheDocument();
     expect(screen.getByText("City3")).toBeInTheDocument();

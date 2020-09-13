@@ -140,7 +140,7 @@ test('renders CityDetails with above zero weather', () => {
   expect(noteButton).toBeInTheDocument();
   fireEvent.click(noteButton);
   
-  const noteEditor = screen.getByRole('note-textbox');
+  const noteEditor = screen.getByTestId('note-textbox');
   expect(noteEditor).toBeInTheDocument();
   fireEvent.change(noteEditor, { target: { value: 'new note'} }) ;
 
@@ -149,7 +149,7 @@ test('renders CityDetails with above zero weather', () => {
   fireEvent.click(noteButton);
   expect(screen.getByText("new note")).toBeInTheDocument();
 
-  expect(screen.queryByRole("note-textbox")).toBeNull();
+  expect(screen.queryByTestId("note-textbox")).toBeNull();
 
   expect(screen.queryByRole("unfavorite")).toBeNull();
 

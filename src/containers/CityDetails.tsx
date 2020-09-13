@@ -225,7 +225,7 @@ const EditNote: React.FC<{editing: boolean, city: ICityState}> = ({editing, city
   return (
     <div className={clsx(classes.note, editing && classes.noteEditing)}>
       {editing && <>
-        <textarea role="note-textbox" defaultValue={city.note} onChange={handleChange} className={classes.noteArea}/>
+        <textarea data-testid="note-textbox" defaultValue={city.note} onChange={handleChange} className={classes.noteArea}/>
       </>}
     </div>
   );

@@ -138,7 +138,7 @@ test('renders CityDetails with above zero weather', () => {
 
   const noteButton = screen.getByRole('noteEdit');
   expect(noteButton).toBeInTheDocument();
-  noteButton.click();
+  fireEvent.click(noteButton);
   
   const noteEditor = screen.getByRole('note-textbox');
   expect(noteEditor).toBeInTheDocument();
@@ -146,7 +146,7 @@ test('renders CityDetails with above zero weather', () => {
 
   expect(store.topCities[0].note).toBe('new note');
 
-  noteButton.click();
+  fireEvent.click(noteButton);
   expect(screen.getByText("new note")).toBeInTheDocument();
 
   expect(screen.queryByRole("note-textbox")).toBeNull();
@@ -155,13 +155,13 @@ test('renders CityDetails with above zero weather', () => {
 
   const favoriteButton = screen.getByRole('favorite');
   expect(favoriteButton).toBeInTheDocument();
-  favoriteButton.click();
+  fireEvent.click(favoriteButton);
 
   expect(screen.queryByRole("favorite")).toBeNull();
 
   const unfavoriteButton = screen.getByRole('unfavorite');
   expect(unfavoriteButton).toBeInTheDocument();
-  unfavoriteButton.click();
+  fireEvent.click(unfavoriteButton);
 
   expect(screen.queryByRole("unfavorite")).toBeNull();
 });

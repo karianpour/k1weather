@@ -39,7 +39,16 @@ export interface ICity {
   region: string,
 }
 
-export class AppApi {
+export interface TAppApi {
+  fetchTopCities(): Promise<ICity[] | undefined>;
+  fetchWeatherForCity(cityName: string): Promise<IWeatherData | undefined>;
+  fetchWeatherForLocation(lat: number, lon: number): Promise<IWeatherData | undefined>;
+  fetchWeatherForMyIP(): Promise<IWeatherData | undefined>;
+  fetchWeather(url: string): Promise<IWeatherData | undefined>;
+  fetchLookup(query: string): Promise<ICity[] | undefined>;
+}
+
+export class AppApi implements TAppApi{
   private WeatherAPIKey: string;
 
   constructor() {

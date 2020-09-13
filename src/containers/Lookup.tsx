@@ -16,7 +16,7 @@ import { ICity } from '../api/AppApi';
  * 
  */
 
-const KeyCode = {
+export const KeyCode = {
   UP: 38,
   DOWN: 40,
   ESC: 27,
@@ -210,7 +210,7 @@ const Lookup: React.FC = () => {
       aria-haspopup="listbox"
     >
       <label htmlFor="lookup-input" id="lookup-label" className={classes.label}>
-        <SearchIcon className={classes.icon} onClick={handleOpenLookup}/>
+        <SearchIcon data-testid="searchIcon" className={classes.icon} onClick={handleOpenLookup}/>
       </label>
       <input
         ref={inputRef}

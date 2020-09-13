@@ -1,7 +1,8 @@
 import React from 'react';
 import { useLocalStore } from 'mobx-react-lite';
 import { types, Instance, SnapshotIn, onSnapshot, getParentOfType, getEnv } from "mobx-state-tree";
-import { AppApi, ICity, IWeatherData } from '../api/AppApi';
+import { AppApi, ICity, IWeatherData, TAppApi } from '../api/AppApi';
+import { MockAppApi } from '../api/MockAppApi';
 
 const WeatherDataTTL = 10 * 60 * 1000;
 
@@ -183,7 +184,7 @@ export const AppState = types
     return {
       async setLookup(query: string) {
         self.lookup = query;
-        if(query){
+        if(self.lookup){
           try{
             const result = await getEnv<EnvType>(self).api.fetchLookup(query);
               self.setOnline();
@@ -311,7 +312,7 @@ export const useAppState = () => {
 }
 
 export type EnvType = {
-  api: AppApi,
+  api: TAppApi,
 }
 
 export function createStore() {
@@ -332,9 +333,9 @@ export function createStore() {
   return store;
 }
 
-export function createTestStore(snapshot: IAppStateSnapshot): IAppState {
+export function createTestStore(snapshot: IAppStateSnapshot, mockApi?: TAppApi): IAppState {
   const injection: EnvType = {
-    api: new AppApi(),
+    api: mockApi || new MockAppApi(),
   }
 
   const store = AppState.create(snapshot, injection);

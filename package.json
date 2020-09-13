@@ -37,7 +37,7 @@
     "postbuild": "cp build/index.html build/404.html",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage",
     "analyze": "source-map-explorer 'docs/static/js/*.js'"
   },
   "eslintConfig": {

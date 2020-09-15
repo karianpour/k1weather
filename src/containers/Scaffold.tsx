@@ -12,6 +12,7 @@ const useStyles = createUseStyles<Theme>(theme => ({
   root: {
     backgroundColor: theme.background.main,
     minHeight: '100vh',
+    marginBottom: 32,
   },
   container: {
     width: '100%',    

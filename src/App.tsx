@@ -52,7 +52,7 @@ const App: React.FC = () => {
           <Route path="/currentLocation">
             <CurrentLocationWeather />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Home />
           </Route>
           <Route path="*">

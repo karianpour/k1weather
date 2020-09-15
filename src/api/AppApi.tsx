@@ -101,7 +101,7 @@ export class AppApi implements TAppApi{
           city: {
             name: data.location.name,
             country: data.location.country,
-            region: data.location.region,
+            region: data.location.region || 'x',
           },
           current: {
             "last_updated_epoch": data.current.last_updated_epoch,
@@ -151,7 +151,7 @@ export class AppApi implements TAppApi{
       if(response.status===200){
         const cities = data.map( c => ({
           name: c.name,
-          region: c.region,
+          region: c.region || 'x',
           country: c.country,
         }));
         return cities;

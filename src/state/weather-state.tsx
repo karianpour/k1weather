@@ -232,7 +232,7 @@ export const AppState = types
         if(!navigator.geolocation){
           throw new Error('no_location_service');
         }
-        const position = await new Promise<Position>((resolve, rejected) => {
+        const position = await new Promise<GeolocationPosition>((resolve, rejected) => {
           navigator.geolocation.getCurrentPosition((position) => {
             resolve(position);
           }, (err) => {
@@ -291,6 +291,7 @@ export const AppState = types
             self.setOffline();
           }
         }
+        return undefined;
       }
     }
   });

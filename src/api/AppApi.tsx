@@ -74,6 +74,7 @@ export class AppApi implements TAppApi{
     } catch (err) {
       this.errorHandler(err);
     }
+    return undefined;
   }
 
   async fetchWeatherForCity(cityName: string): Promise<IWeatherData | undefined> {
@@ -141,6 +142,7 @@ export class AppApi implements TAppApi{
     } catch (err) {
       this.errorHandler(err);
     }
+    return undefined;
   }
 
   async fetchLookup(query: string): Promise<ICity[] | undefined> {
@@ -161,6 +163,7 @@ export class AppApi implements TAppApi{
     } catch (err) {
       this.errorHandler(err);
     }
+    return undefined;
   }
 
   errorHandler (err: any){
